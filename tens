@@ -1,0 +1,33 @@
+# pip install numpy
+# pip install tensorflow
+
+####
+# pynd.py  file
+import numpy as np
+import  tensorflow as tf
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import Adam
+from keras.utils import to_categorical
+from sklearn.model_selection import train_test_split
+
+# Dataset: Inputs (A, B) and Output (Y)
+X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+Y = np.array([[1], [1], [1], [0]])
+
+# Define the model
+model = Sequential()
+model.add(Dense(1, input_dim=2, activation='sigmoid'))
+
+# Compile the model
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+
+#
+model.fit(X, Y, epochs=100, verbose=0)
+
+# Test the model
+predictions = model.predict(X)
+for i, prediction in enumerate(predictions):
+    print(f"Input: {X[i]}, Predicted Output: {np.round(prediction[0])}")
+
+##
